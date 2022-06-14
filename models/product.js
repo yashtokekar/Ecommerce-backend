@@ -53,11 +53,7 @@ const productSchema = new mongoose.Schema({
     },
     brand: {
         type: String,
-        enum: {
-            mobile: ["Samsung", "Apple", "Xiaomi", "Oppo", "Vivo"],
-            laptop: ["Asus", "Acer", "HP", "Apple", "Dell"],
-            tv: ["Sony", "Samsung", "LG"],
-        },
+        enum: ["Samsung", "Apple", "Xiaomi", "Oppo", "Vivo","Asus", "Acer", "HP", "Dell", "Sony","LG"],
     },
     // rating: [
     //     {
