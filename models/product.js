@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema({
         type: String,
         unique: true,
         lowercase: true,
-        text: true,
+        index:true
     },
     description: {
         type: String,
@@ -40,9 +40,9 @@ const productSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    images: {
-        type: Array
-    },
+    // images: {
+    //     type: Array
+    // },
     shipping: {
         type: String,
         enum: ["Yes", "No"],
