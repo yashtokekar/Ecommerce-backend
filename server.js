@@ -13,7 +13,7 @@ const app = express();
 //db
 mongoose
     .connect(process.env.DATABASE, {})
-    .then(() => console.log("MongoDB Conneced...."))
+    .then(() => console.log("MongoDB Connected...."))
     .catch((err) => console.log("DB Error => ", err));
 
 //middleware
