@@ -70,7 +70,7 @@ const productSchema = new mongoose.Schema(
         'LG',
       ],
     },
-    rating: [
+    ratings: [
       {
         star: Number,
         postedBy: { type: ObjectId, ref: 'User' },

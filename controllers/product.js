@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const User = require('../models/user');
 const slugify = require('slugify');
 
 exports.create = async (req, res) => {
@@ -122,7 +123,7 @@ exports.productStar = async (req, res) => {
     let ratingAdded = await Product.findByIdAndUpdate(
       product._id,
       {
-        $push: { ratings: { star: star, postedBy: user._id } },
+        $push: { ratings: { star, postedBy: user._id } },
       },
       { new: true }
     ).exec();
