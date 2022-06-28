@@ -77,7 +77,8 @@ const productSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true },
+  { strictPopulate: false }
 );
 
 module.exports = mongoose.model('Product', productSchema);
