@@ -154,3 +154,20 @@ exports.listRelated = async (req, res) => {
 
   res.json(related);
 };
+
+exports.handleQuery = async (req, res, query) => {
+  const products = await Product.find({ $text: { $search: query } })
+    .populate('category', '_id name')
+    .populate('subs', '_id name')
+    .exec();
+
+  res.json(products);
+};
+
+exports.searchFilters = async (req, res) => {
+  const { query } = req.body;
+
+  if (query) {
+    await handleQuery(req, res, query);
+  }
+};
