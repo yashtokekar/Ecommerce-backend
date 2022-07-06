@@ -159,6 +159,7 @@ const handleQuery = async (req, res, query) => {
   const products = await Product.find({
     slug: {
       $regex: `(.*)${query}(.*)`,
+      $options: 'i',
     },
   })
     .populate('category', '_id name')
@@ -168,10 +169,49 @@ const handleQuery = async (req, res, query) => {
   res.json(products);
 };
 
+const handlePrice = async (req, res, price) => {
+  try {
+    let products = await Product.find({
+      price: {
+        $gte: price[0],
+        $lte: price[1],
+      },
+    })
+      .populate('category', '_id name')
+      .populate('subs', '_id name')
+      .exec();
+
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const handleCategory = async (req, res, category) => {
+  try {
+    let products = await Product.find({ category })
+      .populate('category', '_id name')
+      .populate('subs', '_id name')
+      .exec();
+
+    res.json(products);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 exports.searchFilters = async (req, res) => {
-  const { query } = req.body;
+  const { query, price, category } = req.body;
 
   if (query) {
     await handleQuery(req, res, query);
+  }
+  //price [20, 200] (range)
+  if (price !== undefined) {
+    await handlePrice(req, res, price);
+  }
+
+  if (category) {
+    await handleCategory(req, res, category);
   }
 };
